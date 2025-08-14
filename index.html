@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bright Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body{
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #024704, #000);
+      font-family: 'Roboto', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Animated background elements */
+    body::before,
+    body::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(76, 175, 80, 0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    body::before {
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    body::after {
+      bottom: 10%;
+      right: 10%;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+    
+    main{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+    
+    h1{
+      font-family: 'Roboto', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      letter-spacing: 2px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(76, 175, 80, 0.3); }
+      to { text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 30px rgba(76, 175, 80, 0.6); }
+    }
+
+    .start-btn {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      border: none;
+      border-radius: 15px;
+      padding: 1.2rem 3rem;
+      font-family: 'Intel One Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .start-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .start-btn:hover::before {
+      left: 100%;
+    }
+
+    .start-btn:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+      background: linear-gradient(135deg, #45a049, #4CAF50);
+    }
+
+    .start-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-top: -1rem;
+      font-family: 'Intel One Mono', monospace;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+      
+      .start-btn {
+        padding: 1rem 2rem;
+        font-size: 1.3rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>BRIGHT QUIZ</h1>
+    <p class="subtitle">Test Your Knowledge</p>
+    <a href="level.html"><button class="start-btn">Start Game</button></a>
+  </main>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Level - Bright Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body{
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #024704, #000);
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Animated background elements */
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(76, 175, 80, 0.1);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        body::before {
+            top: 15%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        body::after {
+            bottom: 15%;
+            right: 5%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(180deg); }
+        }
+
+        main{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .level-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .level-btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2.5rem;
+            font-family: 'Intel One Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 200px;
+        }
+
+        .level-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .level-btn:hover::before {
+            left: 100%;
+        }
+
+        .level-btn:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+
+        .level-btn:active {
+            transform: translateY(0);
+        }
+
+        .level-btn.easy {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .level-btn.medium {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+        }
+
+        .level-btn.medium:hover {
+            background: linear-gradient(135deg, #F57C00, #FF9800);
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+        }
+
+        .level-btn.hard {
+            background: linear-gradient(135deg, #F44336, #D32F2F);
+        }
+
+        .level-btn.hard:hover {
+            background: linear-gradient(135deg, #D32F2F, #F44336);
+            box-shadow: 0 8px 25px rgba(244, 67, 54, 0.4);
+        }
+
+        .difficulty-indicator {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 0.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .level-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1.2rem;
+                min-width: 180px;
+            }
+            
+            .level-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1 class="title">Select Level</h1>
+        <div class="level-container">
+            <a href="game.html"><button class="level-btn hard">Hard</button></a>
+            <a href="game.html"><button class="level-btn medium">Medium</button></a>
+            <a href="game.html"><button class="level-btn easy">Easy</button></a>
+        </div>
+    </main>
+</body>
+</html>

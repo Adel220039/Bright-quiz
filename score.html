@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Score</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #024704, #000);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        main{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border-radius: 25px;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 400px;
+        }
+
+        h1{
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .status{
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .wr{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-family: 'Intel One Mono', monospace;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .wr:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .wr img{
+            width: 24px;
+            height: 24px;
+            margin-left: 0.5rem;
+        }
+
+        .wr span{
+            font-weight: 600;
+            color: #4CAF50;
+            margin-left: 0.5rem;
+        }
+
+        .ttl{
+            font-size: 2.2rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 15px;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .ttl span {
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        button{
+            padding: 1rem 2rem;
+            font-size: 1.4rem;
+            font-family: 'Intel One Mono', monospace;
+            font-weight: 600;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            main {
+                min-width: 90%;
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .ttl {
+                font-size: 1.8rem;
+            }
+            
+            .wr {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+      <h1>Your Stats</h1>
+      <div class="status">
+        <p class="wr">Right Answers : <span>8</span> <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cGF0aCBmaWxsPSIjMzdiMzRhIiBkPSJNNTYuNzM0IDUuMDgxYy04LjQzNyA3LjMwMi0xNS41NzUgMTQuMjUzLTIyLjExIDIzLjMyMmMtMi44ODIgNC02LjA4NyA4LjcwOC04LjE4MiAxMy4xNTNjLTEuMTk2IDIuMzU3LTMuMzUyIDYuMDQtNC4wODcgOS41ODFjLTQuMDItMy43NC04LjMzOC03Ljk4NS0xMi43NTYtMTEuMzFjLTMuMTQ5LTIuMzY5LTEyLjIxOSAyLjQ2MS04LjUyNyA1LjIzOWM2LjYxNyA0Ljk3NyAxMi4xMiAxMS4xNzYgMTguNTU2IDE2LjM3NWMyLjY5MiAyLjE3MiA4LjY1OC0yLjU0NSAxMC4wNi00LjUyNGM0LjYwMi02LjUyIDUuMjMxLTE0LjQ5IDguNTg1LTIxLjYwMmM1LjEyMS0xMC44NzcgMTQuMjAzLTE5LjgxMiAyMy4xNy0yNy41NzFjNS45NDEtNS41NDEtLjE5NS02LjU2My00LjctMi42NjMiLz48L3N2Zz4="></p>
+
+        <p class="wr">Wrong Answers : <span>8</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHBhdGggZmlsbD0iI2MzMyIgZD0ibTU4LjkgNzguNmwtNDEuMyA0MS45Yy0xLjUgMS41LTMuMiAyLjUtNSAzYzQuMSAxLjIgOC42LjIgMTEuOC0zbDM4LjItMzguMWMuOC0uOCAyLjEtLjggMi44IDBsLTMuNy0zLjhjLS43LS44LTItLjgtMi44IDBtMjMuNC0xMy4yYy0uOC0uOC0uOC0yIDAtMi44bDM4LjItMzguMWM0LjctNC43IDQuNy0xMi4zIDAtMTdzLTEyLjItNC43LTE2LjkgMEw2NS40IDQ1LjZjLS44LjgtMiAuOC0yLjggMEwyNC41IDcuNWMtNC43LTQuNy0xMi4zLTQuNy0xNyAwYy0uNC40LS43LjgtMSAxLjJjLjItLjMuNC0uNS42LS43YzQuNy00LjYgMTAuMS0yLjUgMTQuOCAyLjJsMzcuNiAzOC41Yy44LjggMiAuOCAyLjggMGwzOS4zLTM5LjJjNC43LTQuNyA5LjQtNS4xIDE0LjEtLjRzMy45IDkuNi0uOCAxNC4zTDc1LjYgNjIuNmMtLjguOC0uOCAyIDAgMi44YzAgMCAzOC4xIDM4LjIgMzggMzguMmM0LjcgNC43IDYuNSAxMCAxLjggMTQuN3MtMTAuNiAzLjUtMTUuMy0xLjFzMy40IDMuNGM0LjcgNC43IDEyLjMgNC43IDE3IDBzNC43LTEyLjIgMC0xNi45YzAtLjEtMzguMi0zOC4zLTM4LjItMzguMyIvPjxwYXRoIGZpbGw9IiNmNDQzMzYiIGQ9Ik0xMTUuNCAxMTguM2M0LjctNC43IDIuOS0xMC0xLjgtMTQuN2MuMSAwLTM4LTM4LjItMzgtMzguMmMtLjgtLjgtLjgtMiAwLTIuOGwzOS4zLTM5LjJjNC43LTQuNyA1LjUtOS42LjgtMTQuM3MtOS40LTQuMy0xNC4xLjRMNjIuMyA0OC43Yy0uOC44LTIgLjgtMi44IDBMMjEuOSAxMC4yQzE3LjIgNS41IDExLjggMy40IDcuMSA4Yy0uMi4yLS40LjQtLjYuN2MtMy43IDQuNy0zLjMgMTEuNCAxIDE1LjdsMzguMSAzOC4yYy44LjguOCAyLjEgMCAyLjhMNy41IDEwMy41Yy00LjcgNC43LTQuNyAxMi4zIDAgMTdjMS41IDEuNSAzLjIgMi41IDUgM2MxLjgtLjYgMy42LTEuNiA1LTNsNDEuMy00MS45Yy44LS44IDIuMS0uOCAyLjggMGwzLjcgMy44bDM0LjcgMzQuOGM0LjggNC42IDEwLjcgNS44IDE1LjQgMS4xIi8+PGcgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTU1IDU2LjRjLTEuMS0xLjYtMzIuMy0zMy4xLTMyLjMtMzMuMXMtMi4zLTIuNi00LjctLjhjLTIuMiAxLjctMS4xIDQuMy4xIDUuNnMyOSAyOS43IDMwLjQgMzAuOWMxLjMgMS4yIDMuOSAxLjQgNS41LjZzMS44LTIuMSAxLTMuMiIgb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTIuMiIgY3k9IjE5IiByPSIzLjMiIG9wYWNpdHk9IjAuMiIvPjwvZz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNzIuMSA4MS44YzEuMSAxLjYgMzIuOCAzMi42IDMyLjggMzIuNnMyLjMgMi42IDQuNy43YzIuMi0xLjcgMS00LjMtLjItNS42UzgwIDgwLjIgNzguNiA3OWMtMS4zLTEuMi0zLjktMS4zLTUuNS0uNXMtMS44IDIuMi0xIDMuMyIgb3BhY2l0eT0iMC4yIi8+PC9zdmc+"></p>
+
+        <p class="ttl">Total Score : <span>8</span></p>
+      </div>
+
+      <button onclick="window.location.href='index.html'">Play Again</button>
+    </main>
+</body>
+</html>

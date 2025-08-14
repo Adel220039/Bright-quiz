@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game - Bright Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            position: relative;
+            background: linear-gradient(135deg, #024704, #000);
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        .logo{
+            height: 60px;
+            width: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .name{
+            font-size: 1.8rem;
+            font-family: 'Intel One Mono', monospace;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .score-container{
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 15px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .score-container p{
+            font-size: 1.3rem;
+            font-weight: 600;
+            font-family: 'Intel One Mono', monospace;
+        }
+
+        .score-container img{
+            width: 24px;
+            height: 24px;
+        }
+
+        main{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            width: 90%;
+            max-width: 800px;
+        }
+        
+        .question{
+            text-align: center;
+            color: #fff;
+            font-size: 1.8rem;
+            font-family: 'Intel One Mono', monospace;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            line-height: 1.4;
+        }
+
+        .answers-grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .answers-grid button{
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            padding: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .answers-grid button:hover{
+            background: rgba(76, 175, 80, 0.2);
+            border-color: rgba(76, 175, 80, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .answers-grid button:active {
+            transform: translateY(0);
+        }
+
+        .next{
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .next button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-family: 'Intel One Mono', monospace;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .next button:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+
+        .next button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+            
+            .name {
+                font-size: 1.4rem;
+            }
+            
+            .logo {
+                height: 50px;
+                width: 50px;
+            }
+            
+            .score-container {
+                padding: 0.6rem 1rem;
+            }
+            
+            .score-container p {
+                font-size: 1.1rem;
+            }
+            
+            main {
+                width: 95%;
+                gap: 2rem;
+            }
+            
+            .question {
+                font-size: 1.4rem;
+                padding: 1.5rem;
+            }
+            
+            .answers-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .answers-grid button {
+                font-size: 1.1rem;
+                padding: 1.2rem;
+                min-height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="images/logo.png" alt="Bright Quiz Logo">
+        <p class="name">Bright Quiz</p>
+        <div class="score-container">
+            <p>10</p>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDQ4IDQ4Ij48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNiYmIyMWMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTM5LjQ2OSAzOS45OTlhMy45OSAzLjk5IDAgMCAxLTMuOTcgMy41aC0yM2MtMi4yMTUgMC00LTEuNzgzLTQtNHYtMzFjMC0yLjIxNSAxLjc4NS00IDQtNGgyM2MyLjIxNyAwIDQgMS43ODUgNCA0djIyLjM2OCIgc3Ryb2tlLXdpZHRoPSIxLjciLz48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNiYmIyMWMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTM3LjEzNCAzNy42NkwyMS4yODggMjEuNzc1VjE3LjI1aDQuNjMybDE1Ljc4NSAxNS44MjhtMi42MSA0LjkwN2ExLjYyMyAxLjYyMyAwIDAgMCAwLTIuMjlsLTIuNjEtMi42MTdsLTQuNTcgNC41ODJsMi42MSAyLjYxN2ExLjYxNCAxLjYxNCAwIDAgMCAyLjI4NCAwek0xMyAxMC41aDIybS0yMiA2Ljc1aDguMjg4TTMyLjY1MiAyNEgzNW0tMjIgMGgxMC41MDhNMTMgMzAuNzVoMTYuOTg5TTEzIDM3LjVoMjIiIHN0cm9rZS13aWR0aD0iMS43Ii8+PC9zdmc+" alt="Score">
+        </div>
+    </header>
+
+    <main>
+        <div class="question">How to center a div?</div>
+
+        <div class="answers-grid">
+            <button>Use display property</button>
+            <button>Use position property</button>
+            <button>Use margin auto</button>
+            <button>Use flexbox</button>
+        </div>
+
+        <div class="next">
+            <a href="score.html"><button>Next</button></a>
+        </div>
+    </main>
+
+    <script src="scripts/questions.js"></script>
+</body>
+</html>

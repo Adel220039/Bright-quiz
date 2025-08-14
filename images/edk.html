@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>idk</title>
+    <style>
+        body{
+            position: relative;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .circle{
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);  
+            width: 100px;
+            height: 100px;
+            background:linear-gradient(90deg ,black,rgb(181, 0, 0));
+            backdrop-filter: blur(1rem);
+            border-radius: 50%;
+            animation: spin 0.3s linear infinite;
+            animation-play-state: running;
+        }
+        .circle:hover{
+            animation-play-state: paused;
+        }
+
+        .circle::after{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);  
+            content: '';
+            width: 70%;
+            height: 70%;
+            background:white;
+            border-radius: 50%;
+        }
+
+        @keyframes spin{
+            from {
+                transform: translate(-50%, -50%) rotateZ(0deg);
+            }
+            to{
+                transform: translate(-50%, -50%) rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="circle"></div>
+</body>
+</html>
