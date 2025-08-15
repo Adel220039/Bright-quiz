@@ -5,19 +5,16 @@ let currentQuests = [];
 export function display(quests){
    currentQuests = quests;
    const questionHtml = document.querySelector('.question');
-   const optionsHtml = document.querySelector('.answers-grid');
    const nextBtn = document.querySelector('.next-btn');
    
-   if (questionHtml && optionsHtml && nextBtn) {
-      // Update question and options
+   if (questionHtml &&  nextBtn) {
       questionHtml.textContent = quests[i].question;
-      optionsHtml.innerHTML = `
-       <button>${quests[i].options[0]}</button>
-       <button>${quests[i].options[1]}</button>
-       <button>${quests[i].options[2]}</button>
-       <button>${quests[i].options[3]}</button>
-      `;
-      
+
+      const options =  document.querySelectorAll('.option');
+      options.forEach(option =>{
+         const {index} = option.dataset;
+         option.textContent = quests[i].options[index];
+      })
       // Update button text based on current position
       if (i === quests.length - 1) {
          nextBtn.textContent = 'Finish';
@@ -50,6 +47,24 @@ export function initGame() {
         if (nextBtn) {
             nextBtn.addEventListener('click', handleNextClick);
         }
+
+
+      const options =  document.querySelectorAll('.option');
+      options.forEach(option =>{
+         const {index} = option.dataset;
+         option.addEventListener('click' ,()=>{
+            if(index == currentQuests[i].correctOptionIndex){
+                  //option.style = 'background-color :blue;';  
+                  console.log('correct');
+                  i++;
+                  display(currentQuests);
+               }else{
+                  console.log('incorrect');
+                  i++;
+                  display(currentQuests);
+               }
+         })
+      })
     }
 }
 
