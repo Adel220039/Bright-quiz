@@ -1,5 +1,48 @@
-const questions = [
-    {
+
+class Questions {
+    id;
+    question;
+    level;
+    points;
+    correctAnswer;
+    options ;
+    correctOptionIndex;
+    constructor(quest){
+        this.id = quest.id;
+        this.question = quest.question;
+        this.level = quest.level;
+        this.points = quest.points;
+        this.correctAnswer = quest.correctAnswer;
+        this.options = quest.options ;
+        this.correctOptionIndex = quest.correctOptionIndex;
+    }
+    
+}
+
+// Function to shuffle array and update correct answer position
+function shuffleOptionsAndUpdateIndex(question) {
+    const correctAnswer = question.correctAnswer;
+    const options = [...question.options]; // Create a copy of options
+    
+    // Fisher-Yates shuffle algorithm
+    for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+    }
+    
+    // Find the new index of the correct answer
+    const newCorrectIndex = options.indexOf(correctAnswer);
+    
+    return {
+        ...question,
+        options: options,
+        correctOptionIndex: newCorrectIndex
+    };
+}
+
+// Apply randomization to all questions
+export const questions = [
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'How to center a div?',
         level: 1,
@@ -12,9 +55,9 @@ const questions = [
             'Use margin auto'
         ],
         correctOptionIndex: 0
-    },
+    }),
     // EASY QUESTIONS (Level 1)
-    {
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What does HTML stand for?',
         level: 1,
@@ -27,8 +70,8 @@ const questions = [
             'Hyperlink and Text Markup Language'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which tag is used for creating a hyperlink?',
         level: 1,
@@ -41,8 +84,8 @@ const questions = [
             '<url>'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What does CSS stand for?',
         level: 1,
@@ -55,8 +98,8 @@ const questions = [
             'Colorful Style Sheets'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which property changes text color?',
         level: 1,
@@ -69,8 +112,8 @@ const questions = [
             'foreground-color'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'How do you add a comment in HTML?',
         level: 1,
@@ -83,8 +126,8 @@ const questions = [
             '##'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which tag creates a paragraph?',
         level: 1,
@@ -97,8 +140,8 @@ const questions = [
             '<para>'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the default display value for div?',
         level: 1,
@@ -111,8 +154,8 @@ const questions = [
             'grid'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which property makes text bold?',
         level: 1,
@@ -125,8 +168,8 @@ const questions = [
             'font-style'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'How do you add a comment in CSS?',
         level: 1,
@@ -139,8 +182,8 @@ const questions = [
             '##'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which tag creates a line break?',
         level: 1,
@@ -153,8 +196,8 @@ const questions = [
             '<newline>'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What does JavaScript do?',
         level: 1,
@@ -167,8 +210,8 @@ const questions = [
             'Optimizes images'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which property changes background color?',
         level: 1,
@@ -181,8 +224,8 @@ const questions = [
             'back-color'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'How do you add a comment in JavaScript?',
         level: 1,
@@ -195,8 +238,8 @@ const questions = [
             '##'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which tag creates a heading?',
         level: 1,
@@ -209,8 +252,8 @@ const questions = [
             '<header>'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the file extension for HTML?',
         level: 1,
@@ -223,9 +266,9 @@ const questions = [
             '.page'
         ],
         correctOptionIndex: 0
-    },
+    }),
     // MEDIUM QUESTIONS (Level 2)
-    {
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the difference between let and var?',
         level: 2,
@@ -238,8 +281,8 @@ const questions = [
             'There is no difference'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What does DOM stand for?',
         level: 2,
@@ -252,8 +295,8 @@ const questions = [
             'Dynamic Object Model'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which CSS property creates rounded corners?',
         level: 2,
@@ -266,8 +309,8 @@ const questions = [
             'border-round'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is an event listener?',
         level: 2,
@@ -280,8 +323,8 @@ const questions = [
             'A JavaScript library'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which method adds an element to the end of an array?',
         level: 2,
@@ -294,8 +337,8 @@ const questions = [
             'insert()'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of localStorage?',
         level: 2,
@@ -308,8 +351,8 @@ const questions = [
             'Store data in cookies'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which CSS property creates a shadow?',
         level: 2,
@@ -322,8 +365,8 @@ const questions = [
             'element-shadow'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is a callback function?',
         level: 2,
@@ -336,8 +379,8 @@ const questions = [
             'A function with no parameters'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which HTML tag creates a form?',
         level: 2,
@@ -350,8 +393,8 @@ const questions = [
             '<formset>'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of JSON?',
         level: 2,
@@ -364,8 +407,8 @@ const questions = [
             'Web server'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which CSS property controls text alignment?',
         level: 2,
@@ -378,8 +421,8 @@ const questions = [
             'alignment'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the difference between == and ===?',
         level: 2,
@@ -392,8 +435,8 @@ const questions = [
             'There is no difference'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which method removes the last element from an array?',
         level: 2,
@@ -406,8 +449,8 @@ const questions = [
             'shift()'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of CSS Grid?',
         level: 2,
@@ -420,8 +463,8 @@ const questions = [
             'Handle user interactions'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which HTML attribute makes an input required?',
         level: 2,
@@ -434,8 +477,8 @@ const questions = [
             'needed'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of async/await?',
         level: 2,
@@ -448,8 +491,8 @@ const questions = [
             'Style elements'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which CSS property creates a transition?',
         level: 2,
@@ -462,8 +505,8 @@ const questions = [
             'change'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of fetch API?',
         level: 2,
@@ -476,8 +519,8 @@ const questions = [
             'Handle events'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'Which HTML tag creates a table?',
         level: 2,
@@ -490,9 +533,9 @@ const questions = [
             '<matrix>'
         ],
         correctOptionIndex: 0
-    },
+    }),
     // HARD QUESTIONS (Level 3)
-    {
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is closure in JavaScript?',
         level: 3,
@@ -505,8 +548,8 @@ const questions = [
             'A type of HTML element'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of Webpack?',
         level: 3,
@@ -519,8 +562,8 @@ const questions = [
             'Database system'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the Virtual DOM?',
         level: 3,
@@ -533,8 +576,8 @@ const questions = [
             'A JavaScript library'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of Redux?',
         level: 3,
@@ -547,8 +590,8 @@ const questions = [
             'Web server'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the difference between null and undefined?',
         level: 3,
@@ -561,8 +604,8 @@ const questions = [
             'There is no difference'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of Babel?',
         level: 3,
@@ -575,8 +618,8 @@ const questions = [
             'Database system'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the event loop in JavaScript?',
         level: 3,
@@ -589,8 +632,8 @@ const questions = [
             'A debugging tool'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of TypeScript?',
         level: 3,
@@ -603,8 +646,8 @@ const questions = [
             'Create databases'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the difference between shallow and deep copy?',
         level: 3,
@@ -617,8 +660,8 @@ const questions = [
             'There is no difference'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of CSS-in-JS?',
         level: 3,
@@ -631,8 +674,8 @@ const questions = [
             'Create animations'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of Service Workers?',
         level: 3,
@@ -645,8 +688,8 @@ const questions = [
             'Style web pages'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of WebSockets?',
         level: 3,
@@ -659,8 +702,8 @@ const questions = [
             'Style web pages'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of JWT?',
         level: 3,
@@ -673,8 +716,8 @@ const questions = [
             'Style web pages'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of GraphQL?',
         level: 3,
@@ -687,8 +730,8 @@ const questions = [
             'JavaScript library'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of Progressive Web Apps?',
         level: 3,
@@ -701,8 +744,8 @@ const questions = [
             'Server-side applications'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of CSS Custom Properties?',
         level: 3,
@@ -715,8 +758,8 @@ const questions = [
             'Create animations'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of Intersection Observer?',
         level: 3,
@@ -729,8 +772,8 @@ const questions = [
             'Style elements'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of Web Components?',
         level: 3,
@@ -743,8 +786,8 @@ const questions = [
             'Handle database operations'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of CSS Grid Areas?',
         level: 3,
@@ -757,8 +800,8 @@ const questions = [
             'Handle user interactions'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of Web Workers?',
         level: 3,
@@ -771,8 +814,8 @@ const questions = [
             'Style web pages'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of CSS Containment?',
         level: 3,
@@ -785,8 +828,8 @@ const questions = [
             'Handle user interactions'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of WebAssembly?',
         level: 3,
@@ -799,8 +842,8 @@ const questions = [
             'Style web pages'
         ],
         correctOptionIndex: 0
-    },
-    {
+    }),
+    shuffleOptionsAndUpdateIndex({
         id: uid(),
         question: 'What is the purpose of CSS Logical Properties?',
         level: 3,
@@ -813,14 +856,28 @@ const questions = [
             'Handle user interactions'
         ],
         correctOptionIndex: 0
+    })
+];
+ export const hardQuests = questions.filter(question =>{
+    if(question.level === 3){
+       return new Questions(question)
     }
-]
+})
 
+export const middQuests = questions.filter(question =>{
+    if(question.level === 2){
+       return new Questions(question)
+    }
+})
+
+export const easyQuests = questions.filter(question =>{
+    if(question.level === 1){
+       return new Questions(question)
+    }
+})
 
 function uid() {
     // Date.now(): milliseconds since 1970 → base‑36 string (e.g. "kxwbls")
     // Math.random(): 0–1 → base‑36, slice off "0." → 5 chars (e.g. "4f2h9")
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
-
-console.log(questions.length)

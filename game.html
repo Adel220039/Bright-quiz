@@ -82,6 +82,7 @@
             gap: 3rem;
             width: 90%;
             max-width: 800px;
+            margin-top: 25px;
         }
         
         .question{
@@ -225,20 +226,21 @@
     </header>
 
     <main>
-        <div class="question">How to center a div?</div>
+        <div class="question"></div>
 
-        <div class="answers-grid">
-            <button>Use display property</button>
-            <button>Use position property</button>
-            <button>Use margin auto</button>
-            <button>Use flexbox</button>
-        </div>
+        <div class="answers-grid"></div>
 
         <div class="next">
-            <a href="score.html"><button>Next</button></a>
+            <button class="next-btn">Next</button>
         </div>
     </main>
-
-    <script src="scripts/questions.js"></script>
+    
+    <script type="module" src="scripts/questions.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module">
+        import { initGame } from './scripts/main.js';
+        
+        window.addEventListener('DOMContentLoaded', initGame);
+    </script>
 </body>
 </html>
