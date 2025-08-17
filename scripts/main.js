@@ -1,6 +1,7 @@
 import {hardQuests, middQuests, easyQuests } from './questions.js';
 let i = 0;
 let currentQuests = [];
+let optionClickHandlers = []; // Store the click handlers for each option
 
 export function display(quests){
    currentQuests = quests;
@@ -23,16 +24,69 @@ export function display(quests){
       }
    }
 };
-
+let TimeoutId ;
+let TimeId ;
 // Handle next button click
 function handleNextClick() {
    if (i < currentQuests.length - 1) {
+      const options =  document.querySelectorAll('.option');
+      options.forEach(option =>{
+         const {index} = option.dataset;
+         clearTimeout(TimeoutId);
+         clearTimeout(TimeId)
+         hideCorIncor(option,index , currentQuests, i)
+      })
+
       i++;
       display(currentQuests);
+      // Restore event listeners when moving to next question
+      restoreOptionEventListeners();
    } else if (i === currentQuests.length - 1) {
       // Last question, redirect to score
       window.location.href = './score.html';
    }
+}
+// show Correct Incorrect answers
+function showCorIncor(option, index, currentQuests, currentIndex){
+   if(index == currentQuests[currentIndex].correctOptionIndex){
+      option.classList.add('active-correct');
+   };
+
+   if(index != currentQuests[currentIndex].correctOptionIndex ){
+      option.classList.add('active-incorrect');
+   }
+};
+
+// hide Correct Incorrect answers
+
+function hideCorIncor(option, index, currentQuests, currentIndex){
+   if(index == currentQuests[currentIndex].correctOptionIndex){
+      option.classList.remove('active-correct');
+   };
+
+   if(index != currentQuests[currentIndex].correctOptionIndex ){
+      option.classList.remove('active-incorrect');
+   }
+}
+
+// Function to remove event listeners from all options
+function removeOptionEventListeners() {
+   const options = document.querySelectorAll('.option');
+   options.forEach((option, optionIndex) => {
+      if (optionClickHandlers[optionIndex]) {
+         option.removeEventListener('click', optionClickHandlers[optionIndex]);
+      }
+   });
+}
+
+// Function to restore event listeners to all options
+function restoreOptionEventListeners() {
+   const options = document.querySelectorAll('.option');
+   options.forEach((option, optionIndex) => {
+      if (optionClickHandlers[optionIndex]) {
+         option.addEventListener('click', optionClickHandlers[optionIndex]);
+      }
+   });
 }
 
 // Initialize the game when DOM is loaded
@@ -49,21 +103,45 @@ export function initGame() {
         }
 
 
-      const options =  document.querySelectorAll('.option');
-      options.forEach(option =>{
+      const options = document.querySelectorAll('.option');
+      options.forEach((option, optionIndex) => {
          const {index} = option.dataset;
-         option.addEventListener('click' ,()=>{
-            if(index == currentQuests[i].correctOptionIndex){
-                  //option.style = 'background-color :blue;';  
-                  console.log('correct');
+         
+         // Create the click handler function
+         const clickHandler = () => {
+            const currentIndex = i; // Store current index before any changes
+            showCorIncor(option, index, currentQuests, currentIndex);
+            
+            // Remove all event listeners immediately after click
+            removeOptionEventListeners();
+            
+            if(index == currentQuests[currentIndex].correctOptionIndex){ 
+               clearTimeout(TimeoutId) 
+               TimeoutId = setTimeout(()=>{
                   i++;
+                  hideCorIncor(option, index, currentQuests, currentIndex);
                   display(currentQuests);
-               }else{
-                  console.log('incorrect');
+                  // Restore event listeners after timeout
+                  restoreOptionEventListeners();
+               }, 4000)
+               
+            } else {
+               clearTimeout(TimeId)
+               TimeId = setTimeout(()=>{
                   i++;
+                  hideCorIncor(option, index, currentQuests, currentIndex);
                   display(currentQuests);
-               }
-         })
+                  // Restore event listeners after timeout
+                  restoreOptionEventListeners();
+               }, 4000)
+            }
+         };
+         
+         // Store the handler function
+         optionClickHandlers[optionIndex] = clickHandler;
+         
+         // Add the event listener
+         option.addEventListener('click', clickHandler);
       })
     }
 }

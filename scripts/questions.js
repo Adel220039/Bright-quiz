@@ -858,23 +858,11 @@ export const questions = [
         correctOptionIndex: 0
     })
 ];
- export const hardQuests = questions.filter(question =>{
-    if(question.level === 3){
-       return new Questions(question)
-    }
-})
+ export const hardQuests = questions.filter(question => question.level === 3).map(question => new Questions(question));
 
-export const middQuests = questions.filter(question =>{
-    if(question.level === 2){
-       return new Questions(question)
-    }
-})
+export const middQuests = questions.filter(question => question.level === 2).map(question => new Questions(question));
 
-export const easyQuests = questions.filter(question =>{
-    if(question.level === 1){
-       return new Questions(question)
-    }
-})
+export const easyQuests = questions.filter(question => question.level === 1).map(question => new Questions(question));
 
 function uid() {
     // Date.now(): milliseconds since 1970 → base‑36 string (e.g. "kxwbls")

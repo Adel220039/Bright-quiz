@@ -137,6 +137,20 @@
         .answers-grid button:active {
             transform: translateY(0);
         }
+        
+        .answers-grid button.active-correct{
+            background: rgb(1, 107, 1) !important;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .answers-grid button.active-incorrect{
+            background: rgb(92, 3, 3) !important;
+        }
+
+        .answers-grid button.active-incorrect:hover{
+            border-color: rgba(175, 76, 76, 0.5);
+            box-shadow: 0 8px 25px rgba(175, 76, 76, 0.3);
+        }
 
         .next{
             display: flex;
