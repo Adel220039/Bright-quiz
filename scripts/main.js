@@ -1,13 +1,23 @@
-import {hardQuests, middQuests, easyQuests } from './questions.js';
+import {
+   hardQuests,
+   middQuests,
+   easyQuests 
+} from './questions.js';
+
+
 let i = 0;
 let currentQuests = [];
 let optionClickHandlers = []; // Store the click handlers for each option
+export let score = 0;
+export let rightAnswers = 0;
+export let wrongAnswers = 0;
+
+
 
 export function display(quests){
    currentQuests = quests;
    const questionHtml = document.querySelector('.question');
    const nextBtn = document.querySelector('.next-btn');
-   
    if (questionHtml &&  nextBtn) {
       questionHtml.textContent = quests[i].question;
 
@@ -43,6 +53,7 @@ function handleNextClick() {
       restoreOptionEventListeners();
    } else if (i === currentQuests.length - 1) {
       // Last question, redirect to score
+      localStorage.setItem('results' , JSON.stringify({score ,rightAnswers ,wrongAnswers}))
       window.location.href = './score.html';
    }
 }
@@ -91,6 +102,8 @@ function restoreOptionEventListeners() {
 
 // Initialize the game when DOM is loaded
 export function initGame() {
+    const scoreNow = document.querySelector('.score-now');
+    scoreNow.textContent = score;
     const selectedQuestions = localStorage.getItem('selectedQuestions');
     if (selectedQuestions) {
         const questions = JSON.parse(selectedQuestions);
@@ -116,6 +129,9 @@ export function initGame() {
             removeOptionEventListeners();
             
             if(index == currentQuests[currentIndex].correctOptionIndex){ 
+               score += currentQuests[currentIndex].points;
+               rightAnswers +=1;
+               scoreNow.textContent = score;
                clearTimeout(TimeoutId) 
                TimeoutId = setTimeout(()=>{
                   i++;
@@ -123,9 +139,10 @@ export function initGame() {
                   display(currentQuests);
                   // Restore event listeners after timeout
                   restoreOptionEventListeners();
-               }, 4000)
+               }, 5000)
                
             } else {
+               wrongAnswers +=1;
                clearTimeout(TimeId)
                TimeId = setTimeout(()=>{
                   i++;
@@ -133,7 +150,7 @@ export function initGame() {
                   display(currentQuests);
                   // Restore event listeners after timeout
                   restoreOptionEventListeners();
-               }, 4000)
+               }, 5000)
             }
          };
          

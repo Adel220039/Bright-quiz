@@ -46,7 +46,7 @@ export const questions = [
         id: uid(),
         question: 'How to center a div?',
         level: 1,
-        points: 10,
+        points: 5,
         correctAnswer: 'Use flexbox',
         options: [
             'Use flexbox',
